@@ -1528,8 +1528,8 @@ header.sc{top:8px!important}
 
 /* =====================================================================
    MOBILE COMPACT PASS (phones): shorter pages through layout and scale only.
-   Rails = swipeable scroll-snap rows with a peek of the next card and a
-   CSS-only position bar. Nothing removed, no copy changed.
+   Scaled grids and mosaics (no horizontal scrolling). Nothing removed,
+   no copy changed.
    ===================================================================== */
 @media(max-width:700px){
  :root{--h-sec:40px;--h-block:20px}
@@ -1557,23 +1557,16 @@ header.sc{top:8px!important}
  html body .intro .big{font-size:3.25rem!important;-webkit-text-stroke-width:2px}
  html body .intro .sub{margin:8px 0 18px!important}
 
- /* rails (shared) */
- html body .svc .bento,html body .qs .wg,html body .sys .sysp>.pane.on{
-  display:flex!important;gap:12px!important;overflow-x:auto;overscroll-behavior-x:contain;
-  scroll-snap-type:x mandatory;scrollbar-width:none;
-  margin-inline:calc(var(--rail-gut) * -1)!important;padding-inline:var(--rail-gut)!important;
-  scroll-padding-inline:var(--rail-gut);-webkit-overflow-scrolling:touch;align-items:stretch}
- html body .svc .bento::-webkit-scrollbar,html body .qs .wg::-webkit-scrollbar,html body .sys .sysp>.pane.on::-webkit-scrollbar{display:none}
- html body .svc .bento>*,html body .qs .wg>*,html body .sys .sysp>.pane.on>*{scroll-snap-align:start;flex:0 0 78%!important;min-width:0}
- html body .sys .sysp>.pane.on>.note{flex-basis:84%!important}
-
- /* services bento -> rail */
- html body .svc .bento .bc,html body .svc .bento .bc:first-child,html body .svc .bento .bc:last-child{grid-column:auto!important;min-height:0!important;height:304px;aspect-ratio:auto}
+ /* services: full-width compact image cards; number, title and link share the top row */
+ html body .svc .bento{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;grid-auto-rows:auto;gap:10px!important;height:auto!important;margin-inline:0!important;padding-inline:0!important;overflow:visible!important}
+ html body .svc .bento .bc,html body .svc .bento .bc:first-child,html body .svc .bento .bc:last-child,html body .svc .bento .bc:not(:first-child):not(:last-child){grid-column:auto!important;grid-row:auto!important;min-height:136px!important;height:auto;aspect-ratio:auto;align-items:flex-end}
+ html body .svc .bento .bc:after{background:linear-gradient(180deg,rgba(10,34,56,.62) 0,rgba(10,34,56,.4) 45%,rgba(10,34,56,.96))}
+ html body .svc .bento .bc .n{top:10px;inset-inline-start:10px;padding:4px 10px}
+ html body .svc .bento .bc .bd,html body .svc .bento .bc:not(:first-child):not(:last-child) .bd{padding:58px 14px 10px!important}
+ html body .svc .bento .bc h3,html body .svc .bento .bc:first-child h3,html body .svc .bento .bc:last-child h3{position:absolute;top:10px;inset-inline:62px 112px;min-height:44px;display:flex;align-items:center;font-size:1.0625rem!important;line-height:1.35!important;margin:0!important}
  html body .svc .bento .bc:not(:first-child):not(:last-child) p{display:block!important;-webkit-line-clamp:unset;overflow:visible}
- html body .svc .bento .bc .bd,html body .svc .bento .bc:not(:first-child):not(:last-child) .bd{padding:46px 16px 12px!important}
- html body .svc .bento .bc h3,html body .svc .bento .bc:first-child h3,html body .svc .bento .bc:last-child h3{font-size:1.125rem!important}
- html body .svc .bento .bc p,html body .svc .bento .bc:first-child p,html body .svc .bento .bc:last-child p{font-size:.9375rem!important;line-height:1.6!important;margin-bottom:4px!important}
- html body .svc .bento .bc .go{min-height:44px}
+ html body .svc .bento .bc p,html body .svc .bento .bc:first-child p,html body .svc .bento .bc:last-child p{font-size:.9375rem!important;line-height:1.6!important;margin:0!important}
+ html body .svc .bento .bc .go{position:absolute;top:10px;inset-inline-end:12px;min-height:44px;display:inline-flex;align-items:center;font-size:.875rem;border-bottom:0;padding:0;white-space:nowrap;text-decoration:underline;text-decoration-color:var(--sky);text-decoration-thickness:2px;text-underline-offset:5px}
 
  /* who: shorter photo, floating stats become one strip under it */
  html body .who .wrap{gap:20px!important}
@@ -1589,12 +1582,22 @@ header.sc{top:8px!important}
  html body ul.tk li{font-size:.9375rem;line-height:1.65;gap:12px}
  html body ul.tk li:before{margin-top:7px;width:10px;height:10px}
 
- /* systems: tabs tighter, panes -> rail */
- html body .sys .stabs{gap:8px!important}
+ /* systems: tabs tighter, active pane = rows with number and title inline (2-up when items are title-only) */
+ html body .sys .stabs{gap:8px!important;margin-bottom:0!important}
  html body .sys .stabs button{min-height:48px!important;padding:6px 10px!important;font-size:.9375rem!important;line-height:1.3}
- html body .sys .sysp{gap:14px!important}
- html body .sys .pane .it{padding:40px 16px 16px!important}
- html body .sys .pane .it b.no{top:10px!important;font-size:1.25rem!important}
+ html body .sys .sysp{gap:12px!important}
+ html body .sys .sysp>.pane.on{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:6px!important;padding:0!important;margin:0 -12px!important;overflow:visible!important}
+ html body .sys .pane .it{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;row-gap:6px;align-items:baseline;height:auto;min-height:0!important;padding:12px 16px!important;border:0!important;clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%,0 16px)}
+ html body .sys .pane .it b.no{position:static!important;font-size:1.125rem!important;line-height:1.35;margin:0!important;color:var(--blue)!important}
+ html body .sys .pane .it h3{font-size:1.0625rem!important;line-height:1.4;margin:0!important;padding:0!important}
+ html body .sys .pane .it p{font-size:.9375rem!important;line-height:1.6!important;margin:0!important;grid-column:1/-1}
+ html body .sys .pane .note{padding:6px 2px 8px!important;margin:0!important;max-width:none!important;text-align:start!important}
+ html body .sys .pane .note p{font-size:.9375rem!important;line-height:1.65!important}
+ html body .sys .sysp>.pane.on:not(:has(.it p)){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html body .sys .sysp>.pane.on:not(:has(.it p)) .note{grid-column:1/-1}
+ html body .sys .sysp>.pane.on:not(:has(.it p)) .it{column-gap:8px;padding:12px 10px!important;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%,0 10px)}
+ html body .sys .sysp>.pane.on:not(:has(.it p)) .it h3{font-size:.9375rem!important;line-height:1.45}
+ html body .sys .sysp>.pane.on:not(:has(.it p)) .it b.no{font-size:.9375rem!important}
 
  /* band */
  html body .band{min-height:0!important;padding-block:40px!important}
@@ -1606,16 +1609,24 @@ header.sc{top:8px!important}
  html body .eq .im{aspect-ratio:2/1;max-height:none}
  html body .eq .im img{height:100%!important;max-height:none!important}
 
- /* quality and safety rail */
- html body .qs .wg .wi{padding:16px 14px!important;flex-basis:74%!important}
- html body .qs .wg .wi:last-child:nth-child(odd){grid-column:auto}
+ /* quality and safety: 2x2 compact cards, icon beside the title */
+ html body .qs .wg{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin-inline:0!important;padding-inline:0!important;overflow:visible!important}
+ html body .qs .wg .wi,html body .qs .wg .wi:last-child:nth-child(odd){display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:8px;row-gap:6px;align-items:center;align-content:start;padding:12px 10px!important;grid-column:auto}
+ html body .qs .wg .wi .ic{width:36px;height:36px;margin:0}
+ html body .qs .wg .wi .ic svg{width:18px;height:18px}
+ html body .qs .wg .wi h3{font-size:.9375rem!important;line-height:1.35;margin:0}
+ html body .qs .wg .wi p{grid-column:1/-1;font-size:.875rem!important;line-height:1.6!important;margin:0;align-self:start}
+ html body .qs .wg .wi .m{grid-column:1/-1;display:inline-flex;align-items:center;min-height:44px;font-size:.875rem!important}
 
- /* photos rail */
+ /* photos: tight mosaic, one hero tile + 3 + 2 */
  html body .prj{padding-bottom:28px!important}
- html body .prj .rail{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:10px!important;
-  padding-inline:var(--rail-gut)!important;scroll-padding-inline:var(--rail-gut);scrollbar-width:none;grid-auto-rows:auto}
- html body .prj .rail .pc:nth-child(n){flex:0 0 72%;height:190px!important;scroll-snap-align:start;grid-column:auto;grid-row:auto}
- html body .prj .hd{align-items:center!important;flex-wrap:nowrap!important}
+ html body .prj .rail{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;grid-auto-rows:78px!important;gap:8px!important;overflow:visible!important;scroll-snap-type:none!important;cursor:default!important;
+  padding-inline:20px!important}
+ html body .prj .rail .pc:nth-child(n){flex:none;width:auto;height:auto!important;grid-column:span 2!important;grid-row:auto!important}
+ html body .prj .rail .pc:nth-child(1){grid-column:1/-1!important;grid-row:span 2!important}
+ html body .prj .rail .pc:nth-child(5),html body .prj .rail .pc:nth-child(6){grid-column:span 3!important}
+ html body .prj .hd{align-items:center!important}
+ html body .prj .hd .arr{display:none}
 
  /* facts: tight 2x2 */
  html body .facts{padding-block:32px!important}
@@ -1627,10 +1638,12 @@ header.sc{top:8px!important}
  html body .facts .n b{font-size:1.75rem!important;line-height:1.1;margin:0!important}
  html body .facts .n span{font-size:.9375rem!important;line-height:1.5;text-align:start}
 
- /* logos wall */
- html body .logos .mq{padding-block:6px!important}
- html body .logos .lg{height:58px!important;padding:0 18px!important}
- html body .logos .lg img{max-height:42px!important;max-width:120px!important}
+ /* logos wall: dense 6-column grid, one set, no animation */
+ html body .logos .mq{padding:4px 20px!important;-webkit-mask:none;mask:none;overflow:visible}
+ html body .logos .mq .tr{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;width:auto!important;animation:none!important;transform:none!important}
+ html body .logos #m1 .lg:nth-child(n+21),html body .logos #m2 .lg:nth-child(n+41){display:none}
+ html body .logos .lg{height:38px!important;padding:0 3px!important;min-width:0}
+ html body .logos .lg img{max-height:30px!important;max-width:100%!important}
 
  /* process: pinned photo, compact steps */
  html body .proc{padding-block:40px!important}
@@ -1657,24 +1670,6 @@ header.sc{top:8px!important}
  html body footer .cp .cr{margin-inline-end:0}
 }
 
-/* rail position hint: CSS-only scroll-driven thumb under each rail (no markup, no JS) */
-@supports(animation-timeline:scroll()){
-@media(max-width:700px){
- @keyframes rail-pos{from{background-position-x:0%}to{background-position-x:100%}}
- @keyframes rail-pos-rtl{from{background-position-x:100%}to{background-position-x:0%}}
- html body .svc .wrap,html body .qs .wrap,html body .sys .sysp{timeline-scope:--rp}
- html body .svc .bento,html body .qs .wg,html body .sys .sysp>.pane{scroll-timeline:--rp inline}
- html body .prj{timeline-scope:--rp}
- html body .prj .rail{scroll-timeline:--rp inline}
- html body .svc .wrap:after,html body .qs .wrap:after,html body .sys .sysp:after,html body .prj:after{
-  content:"";display:block;height:4px;margin:16px 0 0;
-  background:linear-gradient(var(--blue),var(--blue)) 0 0/30% 100% no-repeat,rgba(7,27,45,.14);
-  animation:rail-pos linear both;animation-timeline:--rp}
- html[dir=rtl] body .svc .wrap:after,html[dir=rtl] body .qs .wrap:after,html[dir=rtl] body .sys .sysp:after,html[dir=rtl] body .prj:after{animation-name:rail-pos-rtl}
- html body .prj:after{margin-inline:var(--rail-gut,20px);margin-top:14px}
- html body .prj:after{background:linear-gradient(var(--sky),var(--sky)) 0 0/30% 100% no-repeat,rgba(255,255,255,.22)}
- html body .prj{padding-bottom:36px!important}
-}}
 @media(max-width:700px){
  /* inner pages (privacy, 404): tighter banner and section rhythm */
  html body .doc .hd{padding-block:104px 64px!important}
@@ -1688,4 +1683,164 @@ header.sc{top:8px!important}
  html body .doc .wrap.body ul{margin-bottom:8px!important}
  html body .mq-links{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0 12px!important;max-width:none!important;margin-top:12px!important}
  html body .mq-links a{min-height:48px!important;gap:10px!important}
+}
+
+/* mobile hero: text, button and slide tabs never overlap */
+@media(max-width:700px){
+ html body .hero{height:auto!important;min-height:min(78svh,620px)!important;max-height:none!important}
+ html body .hero .sl .tx{padding-bottom:132px!important}
+ html body .hero .nav4{bottom:44px!important}
+ html body .hero .btn{margin-bottom:6px}
+}
+
+/* top strip final: address + phone share one row, header offset follows the real strip height */
+.topstrip .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.topstrip .ts-a{flex:1 1 auto;min-width:0;line-height:1.45}
+.topstrip .ts-p{flex:none}
+html body header{top:calc(var(--tsh,36px) + 10px)!important}
+html body header.sc{top:8px!important}
+@media(max-width:700px){
+ .topstrip .wrap{padding-block:7px;gap:10px}
+ .topstrip{font-size:.75rem}
+ .topstrip .ts-p{display:inline-flex!important;font-size:.75rem}
+ .topstrip .ts-a:before{width:6px;height:6px}
+ html body header{top:calc(var(--tsh,44px) + 8px)!important}
+}
+
+/* mobile hero, definitive: text block is anchored just above the slide tabs, so the CTA can never overlap them */
+@media(max-width:700px){
+ html body .hero{height:max(600px,min(82svh,680px))!important;min-height:600px!important;max-height:none!important}
+ html body .hero .sl .tx{top:auto!important;bottom:142px!important;transform:none!important;padding-block:0!important;display:flex;align-items:flex-end}
+ html body .hero .sl .tx .wrap{padding-top:0!important}
+ html body .hero .nav4{bottom:44px!important}
+}
+
+/* =====================================================================
+   MOBILE BREATHING PASS (<=700px). One spacing system:
+   section 48px | heading to content 24px | card padding 18-22px |
+   stacked cards 14-16px | rows 16px | paragraphs 1.75+ | mosaic gap 8-10px |
+   buttons 48px | side gutter 20px. Layout, copy and toggles unchanged.
+   ===================================================================== */
+@media(max-width:700px){
+ :root{--h-sec:48px;--h-block:24px}
+ html body{--rail-gut:20px}
+ .wrap{padding-inline:20px}
+
+ /* top strip + floating header: strip gets air, header follows its real height */
+ html body .topstrip .wrap{padding-block:8px!important;line-height:1.55!important}
+ html body header{top:calc(var(--tsh,64px) + 8px)!important}
+ html body header.sc{top:8px!important}
+
+ /* hero: text block, button and slide tabs keep clear space */
+ html body .hero{height:max(640px,min(84svh,700px))!important;min-height:640px!important}
+ html body .hero .sl .tx{bottom:150px!important}
+ html body .hero .nav4{bottom:48px!important}
+ html body .hero .sl .tx .chip{margin-bottom:14px!important}
+ html body .hero .sl .tx h1,html body .hero .sl .tx .h{margin-bottom:14px!important}
+ html body .hero .sl .tx p{line-height:1.75!important;margin-bottom:24px!important}
+ html body .hero .btn{min-height:48px;margin-bottom:0!important}
+ html body .tick{padding:34px 0 16px!important}
+
+ /* section rhythm */
+ html body main>section:not(.hero):not(.band):not(.proc){padding-block:48px!important}
+ html body .proc{padding-block:48px!important}
+ html body .band{padding-block:52px!important}
+ html body main .hd,html body .qs .hd,html body .svc .hd,html body .proc .hd,html body .prj .hd{margin-bottom:24px!important;gap:12px!important}
+ html body main .chip{margin-bottom:12px}
+ html body main h2.t,html body .who h2,html body .eq h2{margin-bottom:12px!important}
+ html body main .sub,html body main .hd p{line-height:1.8!important}
+ html body main .btn{min-height:48px}
+
+ /* intro */
+ html body .intro{padding-block:52px 48px!important}
+ html body .intro .wrap{gap:14px!important}
+ html body .intro .sub{margin:0 0 24px!important}
+
+ /* services: bigger cards, badge/title/link on one clear top row, text well below it */
+ html body .svc .bento{gap:16px!important}
+ html body .svc .bento .bc,html body .svc .bento .bc:first-child,html body .svc .bento .bc:last-child,html body .svc .bento .bc:not(:first-child):not(:last-child){min-height:168px!important}
+ html body .svc .bento .bc .n{top:16px;inset-inline-start:16px;padding:5px 12px}
+ html body .svc .bento .bc .bd,html body .svc .bento .bc:not(:first-child):not(:last-child) .bd{padding:76px 20px 20px!important}
+ html body .svc .bento .bc h3,html body .svc .bento .bc:first-child h3,html body .svc .bento .bc:last-child h3{top:16px;inset-inline:78px 118px}
+ html body .svc .bento .bc .go{top:16px;inset-inline-end:18px}
+ html body .svc .bento .bc p,html body .svc .bento .bc:first-child p,html body .svc .bento .bc:last-child p{line-height:1.75!important}
+ html[lang=en] body .svc .bento .bc h3,html[lang=en] body .svc .bento .bc:first-child h3,html[lang=en] body .svc .bento .bc:last-child h3{font-size:1rem!important;line-height:1.3!important}
+ html[lang=en] body .svc .bento .bc .bd,html[lang=en] body .svc .bento .bc:not(:first-child):not(:last-child) .bd{padding-top:94px!important}
+
+ /* who */
+ html body .who .wrap{gap:28px!important}
+ html body .who .ph .fl{padding:14px 12px!important}
+ html body ul.tk{gap:14px!important;margin-bottom:24px!important}
+ html body ul.tk li{line-height:1.75;gap:14px}
+ html body ul.tk li:before{margin-top:9px}
+
+ /* systems */
+ html body .sys .stabs{gap:10px!important}
+ html body .sys .stabs button{padding:8px 12px!important}
+ html body .sys .sysp{gap:20px!important}
+ html body .sys .sysp>.pane.on{gap:14px!important;margin:0!important}
+ html body .sys .pane .it{column-gap:12px;row-gap:8px;padding:18px 20px!important}
+ html body .sys .pane .it p{line-height:1.75!important}
+ html body .sys .pane .note{padding:0 0 6px!important}
+ html body .sys .pane .note p{line-height:1.8!important}
+ html body .sys .sysp>.pane.on:not(:has(.it p)){gap:12px!important}
+ html body .sys .sysp>.pane.on:not(:has(.it p)) .it{column-gap:10px;padding:16px 14px!important}
+
+ /* band */
+ html body .band h2{margin-bottom:14px!important;line-height:1.4!important}
+ html body .band p{margin-bottom:24px!important;line-height:1.75!important}
+
+ /* process: photo, then steps with the numeral clear of the title */
+ html body .proc .pv{margin-bottom:20px!important}
+ html body .proc .pv .cap{padding:30px 18px 14px!important}
+ html body .proc .rw{padding-block:16px!important;padding-bottom:16px!important;grid-template-columns:36px minmax(0,1fr)!important;gap:6px 14px!important;align-items:start}
+ html body .proc .rw p{line-height:1.75!important}
+
+ /* projects mosaic */
+ html body .prj{padding-bottom:44px!important}
+ html body .prj .rail{grid-auto-rows:84px!important;gap:10px!important}
+
+ /* equipment */
+ html body .eq .wrap{gap:24px!important}
+
+ /* quality and safety: single column, icon beside title, real padding */
+ html body .qs .wg{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+ html body .qs .wg .wi,html body .qs .wg .wi:last-child:nth-child(odd){grid-template-columns:44px minmax(0,1fr);column-gap:14px;row-gap:10px;padding:20px!important}
+ html body .qs .wg .wi .ic{width:44px;height:44px}
+ html body .qs .wg .wi .ic svg{width:20px;height:20px}
+ html body .qs .wg .wi h3{font-size:1.0625rem!important;line-height:1.4}
+ html body .qs .wg .wi p{font-size:.9375rem!important;line-height:1.75!important}
+
+ /* facts */
+ html body .facts{padding-block:48px!important}
+ html body .facts h2{margin-bottom:20px!important;line-height:1.4!important}
+ html body .facts .n{padding:16px 0!important;gap:0 16px}
+ html body .facts .n span{line-height:1.65}
+
+ /* logos wall */
+ html body .logos .mq .tr{gap:8px}
+ html body .logos .lg{height:42px!important}
+ html body .logos .mq.rev{margin-top:8px}
+
+ /* footer */
+ html body footer .g{gap:28px 20px!important;padding-block:72px 20px!important}
+ html body footer .g>*:first-child{gap:16px}
+ html body footer .g p{line-height:1.8}
+ html body footer h3{margin-bottom:12px!important}
+ html body footer .cp{padding-block:20px 88px!important;gap:4px 22px!important}
+
+ /* inner pages (privacy, 404) */
+ html body .doc .hd{padding-block:108px 64px!important;margin-bottom:8px!important}
+ html body .doc .hd .crumbs{margin-bottom:14px}
+ html body .doc .hd h1{margin-top:14px!important;line-height:1.35!important}
+ html body .doc .hd p{margin-block:14px 0!important;line-height:1.8!important}
+ html body .doc .wrap.body{padding-bottom:48px!important}
+ html body .doc .wrap.body>section{padding-block:36px!important}
+ html body .doc .wrap.body h2{margin-bottom:14px!important;line-height:1.4!important}
+ html body .doc .wrap.body p,html body .doc .wrap.body li{line-height:1.85!important}
+ html body .doc .wrap.body p{margin-bottom:14px!important}
+ html body .doc .wrap.body li{margin-bottom:12px!important}
+ html body .doc .wrap.body ul{margin-bottom:12px!important}
+ html body .mq-links{gap:6px 14px!important;margin-top:16px!important}
+ html body .mq-links a{min-height:48px!important}
 }

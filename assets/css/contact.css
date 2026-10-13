@@ -181,3 +181,31 @@ html[dir=rtl] .doc .ct .fld select{background-position:left 16px center;padding-
  .doc .ct .ct-list li:nth-child(3) a[href^="tel"]{font-size:.875rem;letter-spacing:-.01em;white-space:nowrap}
  .doc .ct .ct-act{margin-top:10px}
 }
+
+/* ===== MOBILE BREATHING ROOM (<=900px): one spacing system, 20px gutters, 20-24px card padding ===== */
+@media(max-width:900px){
+ .doc .hd{margin-bottom:44px!important}
+ .doc .wrap.body{padding-bottom:56px!important}
+ .doc .wrap.body>.ct{gap:16px!important}
+ .doc .ct>section{padding:28px 22px 30px!important}
+ .doc .ct>section h2,.doc .ct>section:first-child h2,.doc .ct>section:last-child h2{margin:0 0 24px!important;line-height:1.5}
+ .doc .ct form{gap:20px}
+ .doc .ct form fieldset,.doc .ct form fieldset:first-of-type,.doc .ct form fieldset:last-of-type{gap:20px 14px!important}
+ .doc .ct .fld label{margin-bottom:8px;line-height:1.5}
+ .doc .ct form .fld input,.doc .ct form .fld select{height:50px;min-height:50px;padding:12px 14px}
+ .doc .ct form textarea{min-height:112px;padding:12px 14px;line-height:1.7}
+ .doc .ct .fld .err:not(:empty){margin-top:8px;line-height:1.6}
+ .doc .ct .fx{gap:12px;margin-top:8px}
+ .doc .ct .fx .btn{min-height:50px;padding-block:12px}
+ #st{line-height:1.75}
+ /* info tiles */
+ .doc .ct .ct-list{gap:12px!important}
+ .doc .ct .ct-list li:nth-child(n){padding:18px 16px!important;padding-inline-start:16px!important}
+ .doc .ct .ct-list li:nth-child(4),.doc .ct .ct-list li:nth-child(5),.doc .ct .ct-list li:nth-child(6){padding:16px 16px!important;padding-inline-start:64px!important;min-height:68px}
+ .doc .ct .ct-list .ci{top:16px;inset-inline-end:16px}
+ .doc .ct .ct-list li:nth-child(4) .ci,.doc .ct .ct-list li:nth-child(5) .ci,.doc .ct .ct-list li:nth-child(6) .ci{inset-inline-start:16px}
+ .doc .ct .ct-list .k{margin-bottom:6px;padding-inline-end:46px}
+ .doc .ct .ct-list .v,.doc .ct .ct-list address,.doc .ct .ct-list li>a{line-height:1.75}
+ .doc .ct .ct-act{margin-top:20px}
+ .doc .ct .ct-act .btn{min-height:50px}
+}

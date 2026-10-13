@@ -174,88 +174,141 @@ html[lang=en] .a-tools b:empty{display:none}
 
 /* =====================================================================
    MOBILE COMPACT (<=700px) -- layout and scale only, no content change.
-   Repeating card sets become swipe rails (scroll-snap, next card peeks in,
-   thin scrollbar = position hint). Logo walls become 2/3-row mosaics.
+   Everything flows vertically: icon-left rows, stacked panels, a 2-col
+   equipment grid, wrapped model chips and a dense 4-col logo wall.
+   No horizontal scrolling anywhere on this page.
    ===================================================================== */
 @media(max-width:700px){
- .ab.a2{--rg:clamp(20px,4vw,40px)}
  .doc .hd{padding-bottom:26px!important;margin-bottom:18px!important}
- .ab.a2>section{padding-block:24px 26px!important;border-top-width:2px}
+ .ab.a2>section{padding-block:24px 26px!important;border-top-width:2px;padding-inline:clamp(20px,4vw,40px)!important}
  .ab.a2>section:first-child{padding-top:4px!important;border-top:0}
  .ab.a2 .a-head{margin-bottom:14px;gap:12px}
  .ab.a2 h2{font-size:1.5rem;line-height:1.3}
  .ab.a2 .a-no{font-size:.875rem}
- .ab.a2 .a-lead{font-size:1.1875rem!important;line-height:1.65!important;margin-bottom:18px!important}
+ .ab.a2 .a-lead{font-size:1.1875rem!important;line-height:1.65!important;margin-bottom:16px!important}
 
- /* shared rail */
+ /* stacked card sets: tight gap, no rail, no bleed */
  .ab.a2 .a-pillars,.ab.a2 .a-mvg,.ab.a2 .a-duo,.ab.a2 .a-roles,.ab.a2 .a-apg{
-  display:flex!important;align-items:stretch;gap:12px!important;margin-top:0;
-  width:100vw;box-sizing:border-box;margin-inline:calc(50% - 50vw)!important;
-  padding:0 var(--rg) 10px!important;scroll-padding-inline:var(--rg);
-  overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
-  scrollbar-width:thin;scrollbar-color:var(--blue) transparent;-webkit-overflow-scrolling:touch}
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;margin:0!important;padding:0!important;width:auto;overflow:visible}
  .ab.a2 .a-pillars>li,.ab.a2 .a-mvg>article,.ab.a2 .a-duo>article,.ab.a2 .a-roles>article,.ab.a2 .a-apg>article{
-  flex:0 0 min(82vw,340px)!important;grid-column:auto!important;scroll-snap-align:start;box-sizing:border-box;min-width:0}
+  grid-column:auto!important;min-width:0;box-sizing:border-box}
 
- /* 01 pillars: numeral sits in flow above the text, not over it */
- .ab.a2 .a-pillars li{padding:16px 18px 18px!important;justify-content:flex-start;gap:8px;min-height:0!important}
- .ab.a2 .a-pillars .n{position:relative!important;top:auto!important;inset-inline-start:auto!important;width:42px!important;height:42px!important;flex:none}
- .ab.a2 .a-pillars p{padding-top:0!important;font-size:.9375rem!important;line-height:1.7!important}
- .ab.a2 .a-pillars li:after{width:90px;height:90px;inset-inline-end:-30px;top:-30px}
+ /* 01 pillars: small diamond numeral floats at the start, text wraps around it */
+ .ab.a2 .a-pillars li{display:block;padding:12px 14px!important;min-height:0!important}
+ .ab.a2 .a-pillars .n{position:relative!important;float:inline-start;top:auto!important;inset-inline-start:auto!important;width:40px!important;height:40px!important;margin:0 0 4px 12px!important;margin-inline:0 12px!important;shape-outside:margin-box}
+ .ab.a2 .a-pillars p{padding-top:0!important;font-size:.9375rem!important;line-height:1.6!important}
+ .ab.a2 .a-pillars li:after{width:80px;height:80px;inset-inline-end:-30px;top:-30px}
 
+ .ab.a2 .a-pillars p,.ab.a2 .a-mvg p:last-child,.ab.a2 .a-duo p:last-child,.ab.a2 .a-apg p,.ab.a2 .a-role p{margin-bottom:0!important}
+ .ab.a2 .a-tools li,.ab.a2 .a-goals li,.ab.a2 .a-models li,.ab.a2 .a-logos li,.ab.a2 .a-pillars li,.ab.a2 .a-role li{margin:0!important}
  /* 02 mission / vision */
- .ab.a2 .a-mission,.ab.a2 .a-vision,.ab.a2 .a-q,.ab.a2 .a-s{padding:20px 18px 20px!important}
- .ab.a2 .a-mission h3,.ab.a2 .a-vision h3,.ab.a2 .a-q h3,.ab.a2 .a-s h3{margin-bottom:8px}
- .ab.a2 .a-mission .lede,.ab.a2 .a-vision .lede,.ab.a2 .a-q .lede,.ab.a2 .a-s .lede{font-size:1.125rem!important;line-height:1.55;margin-bottom:8px!important}
- .ab.a2 .a-mission p:not(.lede),.ab.a2 .a-vision p:not(.lede),.ab.a2 .a-q p:not(.lede),.ab.a2 .a-s p:not(.lede){font-size:.9375rem;line-height:1.7;margin-top:8px!important}
+ .ab.a2 .a-mission,.ab.a2 .a-vision,.ab.a2 .a-q,.ab.a2 .a-s{padding:18px 16px!important}
+ .ab.a2 .a-mission h3,.ab.a2 .a-vision h3,.ab.a2 .a-q h3,.ab.a2 .a-s h3{margin-bottom:6px}
+ .ab.a2 .a-mission .lede,.ab.a2 .a-vision .lede,.ab.a2 .a-q .lede,.ab.a2 .a-s .lede{font-size:1.0625rem!important;line-height:1.55;margin-bottom:6px!important}
+ .ab.a2 .a-mission p:not(.lede),.ab.a2 .a-vision p:not(.lede),.ab.a2 .a-q p:not(.lede),.ab.a2 .a-s p:not(.lede){font-size:.9375rem;line-height:1.65;margin-top:6px!important}
  .ab.a2 .a-q .sm,.ab.a2 .a-s .sm{font-size:.9375rem!important}
- .ab.a2 .a-tag{margin-top:14px!important;padding:20px 18px!important;font-size:1.125rem!important;line-height:1.5;background-size:90px 68px;background-position:left -34px bottom -8px,right -34px top -8px}
- .ab.a2 .a-tag:before{width:10px;height:10px;margin:0 auto 10px!important}
- .ab.a2 .a-tag:after{margin-top:12px;width:44px}
+ .ab.a2 .a-tag{margin-top:10px!important;padding:18px 16px!important;font-size:1.0625rem!important;line-height:1.5;background-size:90px 68px;background-position:left -34px bottom -8px,right -34px top -8px}
+ .ab.a2 .a-tag:before{width:10px;height:10px;margin:0 auto 8px!important}
+ .ab.a2 .a-tag:after{margin-top:10px;width:44px}
 
- /* 03 quality + safety */
- .ab.a2 .a-goals{margin-top:20px}
- .ab.a2 .a-goals h3{font-size:1.0625rem;margin-bottom:10px}
- .ab.a2 .a-goals ol{display:grid!important;grid-template-columns:none!important;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:min(74vw,300px);gap:8px!important;
-  width:100vw;box-sizing:border-box;margin-inline:calc(50% - 50vw)!important;padding:0 var(--rg) 10px!important;scroll-padding-inline:var(--rg);
-  overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--blue) transparent}
- .ab.a2 .a-goals li{padding:12px 14px;gap:12px;font-size:.9375rem;line-height:1.6;scroll-snap-align:start}
- .ab.a2 .a-roles{margin-top:16px}
- .ab.a2 .a-role{padding:18px 16px 14px}
- .ab.a2 .a-role h3{margin-bottom:8px}
- .ab.a2 .a-role ul{gap:8px}
- .ab.a2 .a-role li{line-height:1.65}
- .ab.a2 .a-plan{margin-top:12px!important;font-size:.9375rem;line-height:1.75}
+ /* 03 quality + safety: number + text inline rows */
+ .ab.a2 .a-goals{margin-top:18px}
+ .ab.a2 .a-goals h3{font-size:1.0625rem;margin-bottom:8px}
+ .ab.a2 .a-goals ol{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;margin:0!important;padding:0!important;width:auto;overflow:visible}
+ .ab.a2 .a-goals li{padding:10px 10px;gap:8px;font-size:.9375rem;line-height:1.5;align-items:flex-start;min-width:0}
+ .ab.a2 .a-goals .n{min-width:1.4em;font-size:1.0625rem;line-height:1.4}
+ .ab.a2 .a-roles{margin-top:12px!important}
+ .ab.a2 .a-role{padding:14px 16px 12px}
+ .ab.a2 .a-role h3{margin-bottom:6px}
+ .ab.a2 .a-role ul{gap:6px}
+ .ab.a2 .a-role li{line-height:1.6}
+ .ab.a2 .a-plan{margin-top:12px!important;font-size:.9375rem;line-height:1.7}
 
- /* 04 equipment */
- .ab.a2 .a-eqg{gap:14px}
- .ab.a2 .a-tools{gap:8px!important}
- .ab.a2 .a-tools li{padding:10px 10px!important}
- .ab.a2 .a-tools b,.ab.a2 .a-tools bdi{font-size:.875rem;line-height:1.4}
- .ab.a2 .a-models{display:block;margin-top:16px}
+ /* 04 equipment: 2-col tools, wrapped chips */
+ .ab.a2 .a-eqg{gap:12px}
+ .ab.a2 .a-tools{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin:0!important;padding:0!important;width:auto;overflow:visible}
+ .ab.a2 .a-tools li{padding:10px!important;grid-column:auto!important;min-width:0}
+ .ab.a2 .a-tools li:last-child:nth-child(odd){grid-column:1/-1!important}
+ .ab.a2 .a-tools b,.ab.a2 .a-tools bdi{font-size:.875rem;line-height:1.4;overflow-wrap:anywhere}
+ .ab.a2 .a-models{display:block;margin-top:14px}
  .ab.a2 .a-models .lbl{display:block;margin-bottom:8px}
- .ab.a2 .a-models ul{flex-wrap:nowrap;width:100vw;box-sizing:border-box;margin-inline:calc(50% - 50vw)!important;padding:0 var(--rg) 8px!important;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--blue) transparent}
- .ab.a2 .a-models li{flex:none;scroll-snap-align:start;white-space:nowrap}
+ .ab.a2 .a-models ul{display:flex;flex-wrap:wrap;gap:6px;width:auto;margin:0!important;padding:0!important;overflow:visible}
+ .ab.a2 .a-models li{flex:0 1 auto;white-space:normal;padding:6px 12px;font-size:.9375rem}
 
  /* 05 approvals */
- .ab.a2 .a-apg article{padding:18px 16px}
- .ab.a2 .a-apg b{font-size:1.0625rem;margin-bottom:6px}
- .ab.a2 .a-apg p{line-height:1.7}
+ .ab.a2 .a-apg article{padding:14px 16px}
+ .ab.a2 .a-apg b{font-size:1.0625rem;margin-bottom:4px}
+ .ab.a2 .a-apg p{line-height:1.65}
 
- /* 06 logo walls: 2-row (partners) and 3-row (clients) mosaics that swipe sideways */
- .a-wall-g+.a-wall-g{margin-top:20px}
+ /* 06 logo walls: dense 4-col grid, small logos */
+ .a-wall-g+.a-wall-g{margin-top:18px}
  .a-wall-g h3{margin-bottom:10px}
- .ab.a2 .a-logos{display:grid!important;flex-wrap:nowrap;grid-template-columns:none!important;grid-template-rows:repeat(2,58px);grid-auto-flow:column;grid-auto-columns:30vw;gap:8px!important;
-  width:100vw;box-sizing:border-box;margin-inline:calc(50% - 50vw)!important;padding:0 var(--rg) 10px!important;scroll-padding-inline:var(--rg);
-  overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--blue) transparent}
- .ab.a2 .a-wall-g+.a-wall-g .a-logos{grid-template-rows:repeat(3,58px)}
- .ab.a2 .a-logos li{flex:none;height:auto;padding:6px 10px;scroll-snap-align:start}
- .ab.a2 .a-logos img{max-height:40px}
+ .ab.a2 .a-logos{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;margin:0!important;padding:0!important;width:auto;overflow:visible}
+ .ab.a2 .a-logos li{flex:none;height:46px;padding:5px 6px;min-width:0;width:auto}
+ .ab.a2 .a-logos img{max-height:30px;max-width:100%}
 }
+
+/* =====================================================================
+   MOBILE BREATHING ROOM (<=700px) -- one spacing system, layout only.
+   sections 48-52px, heading to content 22px, card padding 20px, card gap 16px,
+   list rows 16px, body line-height 1.8, 20px gutters, tiles 10px.
+   ===================================================================== */
 @media(max-width:700px){
- /* tools: 2-row swipe mosaic instead of a long 2-col list */
- .ab.a2 .a-tools{display:grid!important;grid-template-columns:none!important;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:min(46vw,190px);gap:8px!important;
-  width:100vw;box-sizing:border-box;margin-inline:calc(50% - 50vw)!important;padding:0 var(--rg) 10px!important;scroll-padding-inline:var(--rg);
-  overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--blue) transparent}
- .ab.a2 .a-tools li{scroll-snap-align:start;grid-column:auto!important}
+ html body .doc .hd{padding-bottom:34px!important;margin-bottom:28px!important}
+ html body .ab.a2>section{padding-block:44px 46px!important;padding-inline:20px!important}
+ html body .ab.a2>section:first-child{padding-top:12px!important}
+ html body .ab.a2 .a-head{margin-bottom:22px;gap:14px}
+ html body .ab.a2 h2{font-size:1.5rem;line-height:1.4}
+ html body .ab.a2 .a-lead{font-size:1.1875rem!important;line-height:1.8!important;margin-bottom:28px!important}
+
+ /* stacked card sets */
+ html body .ab.a2 .a-pillars,html body .ab.a2 .a-mvg,html body .ab.a2 .a-duo,html body .ab.a2 .a-roles,html body .ab.a2 .a-apg{gap:16px!important}
+
+ /* 01 pillars: numeral and text sit side by side, never touching an edge */
+ html body .ab.a2 .a-pillars li{display:grid!important;grid-template-columns:44px minmax(0,1fr);column-gap:16px;align-items:start;padding:20px!important}
+ html body .ab.a2 .a-pillars .n{float:none!important;position:relative!important;width:44px!important;height:44px!important;margin:0!important;shape-outside:none}
+ html body .ab.a2 .a-pillars p{padding-top:0!important;font-size:.9375rem!important;line-height:1.85!important;margin:0!important}
+ html body .ab.a2 .a-pillars li:after{width:70px;height:70px;inset-inline-end:-30px;top:-30px}
+
+ /* 02 mission / vision / tagline */
+ html body .ab.a2 .a-mission,html body .ab.a2 .a-vision,html body .ab.a2 .a-q,html body .ab.a2 .a-s{padding:22px 20px!important}
+ html body .ab.a2 .a-mission h3,html body .ab.a2 .a-vision h3,html body .ab.a2 .a-q h3,html body .ab.a2 .a-s h3{margin-bottom:14px}
+ html body .ab.a2 .a-mission .lede,html body .ab.a2 .a-vision .lede,html body .ab.a2 .a-q .lede,html body .ab.a2 .a-s .lede{font-size:1.125rem!important;line-height:1.7;margin-bottom:14px!important}
+ html body .ab.a2 .a-mission p:not(.lede),html body .ab.a2 .a-vision p:not(.lede),html body .ab.a2 .a-q p:not(.lede),html body .ab.a2 .a-s p:not(.lede){line-height:1.8;margin-top:12px!important}
+ html body .ab.a2 .a-tag{margin-top:16px!important;padding:30px 22px!important;font-size:1.125rem!important;line-height:1.7}
+ html body .ab.a2 .a-tag:before{margin:0 auto 16px!important}
+ html body .ab.a2 .a-tag:after{margin-top:18px}
+
+ /* 03 goals + roles */
+ html body .ab.a2 .a-goals{margin-top:36px}
+ html body .ab.a2 .a-goals h3{font-size:1.125rem;margin-bottom:16px}
+ html body .ab.a2 .a-goals ol{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+ html body .ab.a2 .a-goals li{padding:14px 18px;gap:14px;line-height:1.7;align-items:flex-start}
+ html body .ab.a2 .a-roles{margin-top:28px!important}
+ html body .ab.a2 .a-role{padding:20px}
+ html body .ab.a2 .a-role h3{margin-bottom:14px}
+ html body .ab.a2 .a-role ul{gap:12px}
+ html body .ab.a2 .a-role li{line-height:1.75}
+ html body .ab.a2 .a-plan{margin-top:28px!important;line-height:1.85}
+
+ /* 04 equipment */
+ html body .ab.a2 .a-eqg{gap:24px}
+ html body .ab.a2 .a-tools{gap:12px!important}
+ html body .ab.a2 .a-tools li{padding:14px!important}
+ html body .ab.a2 .a-models{margin-top:28px}
+ html body .ab.a2 .a-models .lbl{margin-bottom:12px}
+ html body .ab.a2 .a-models ul{gap:10px}
+ html body .ab.a2 .a-models li{padding:8px 14px}
+
+ /* 05 approvals */
+ html body .ab.a2 .a-apg article{padding:20px}
+ html body .ab.a2 .a-apg b{margin-bottom:8px}
+ html body .ab.a2 .a-apg p{line-height:1.8}
+
+ /* 06 logo wall */
+ html body .a-wall-g+.a-wall-g{margin-top:32px}
+ html body .a-wall-g h3{margin-bottom:14px}
+ html body .ab.a2 .a-logos{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}
+ html body .ab.a2 .a-logos li{height:54px;padding:6px 8px}
+ html body .ab.a2 .a-logos img{max-height:36px}
 }
