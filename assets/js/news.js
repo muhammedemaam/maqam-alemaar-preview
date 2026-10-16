@@ -6,7 +6,7 @@ function open(a){
  var art=a.closest('article');if(!art)return;last=a;
  var im=art.querySelector('img');fig.innerHTML='';if(im){var c=im.cloneNode();c.removeAttribute('loading');fig.appendChild(c)}
  meta.innerHTML=art.querySelector('.nw-meta').innerHTML;
- ttl.textContent=art.querySelector('.nw-t').textContent;
+ ttl.innerHTML=art.querySelector('.nw-a').innerHTML;
  var full=art.querySelector('.nw-full');
  con.innerHTML=full?full.innerHTML:'<p>'+art.querySelector('.nw-s').textContent+'</p>';
  m.classList.add('on');m.setAttribute('aria-hidden','false');document.documentElement.classList.add('nwm-open');

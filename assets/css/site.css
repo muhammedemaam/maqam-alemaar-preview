@@ -1844,3 +1844,22 @@ html body header.sc{top:8px!important}
  html body .mq-links{gap:6px 14px!important;margin-top:16px!important}
  html body .mq-links a{min-height:48px!important}
 }
+
+/* review round 16 Oct: bigger logo, WhatsApp green, address opens the map */
+header .logo{min-height:68px}
+header .logo img{height:56px;width:auto}
+header .bar{min-height:72px}
+@media(max-width:700px){header .logo img{height:50px}header .bar{min-height:64px}}
+html body #wa{background:#25d366!important;color:#fff}
+html body #wa:hover{background:#1ebe5a!important}
+html body #wa svg{fill:#fff}
+.topstrip a.ts-a{color:#d6e6f2;font-weight:400;text-decoration:none;white-space:normal;min-height:0}
+.topstrip a.ts-a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+
+/* logo a bit bigger (17 Oct) */
+header .logo{min-height:80px}
+header .logo img{height:68px;width:auto}
+header .bar{min-height:84px}
+@media(max-width:700px){header .logo{min-height:72px}header .logo img{height:60px}header .bar{min-height:74px}}
+header.sc .logo img{height:56px}
+header.sc .bar{min-height:70px}
