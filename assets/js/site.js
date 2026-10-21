@@ -76,7 +76,7 @@ if(hero){
 }
 var tickEl=$('#tick');
 if(tickEl){
- var T={ar:['أرضيات الخرسانة','الأرضيات الراتنجية','إصلاح الخرسانة','العزل المائي والحراري','المعيار الأوروبي TR.34','التسوية بآلات الليزر','فريق إصلاح معتمد','FM1 · FM2 · FM3'],en:['Concrete flooring','Resinous flooring','Concrete repair','Waterproofing and thermal insulation','European code TR.34','Laser screeding machines','Certified repair team','FM1 · FM2 · FM3']};
+ var T={ar:['أرضيات الخرسانة','أرضيات الإيبوكسي','إصلاح الخرسانة','العزل المائي والحراري','المعيار الأوروبي TR.34','التسوية بآلات الليزر','فريق إصلاح معتمد','FM1 · FM2 · FM3'],en:['Concrete flooring','Epoxy flooring','Concrete repair','Waterproofing and thermal insulation','European code TR.34','Laser screeding machines','Certified repair team','FM1 · FM2 · FM3']};
  var bt=function(){var a=T[H.lang==='ar'?'ar':'en'].map(function(x){return'<span>'+x+'</span>'}).join('');tickEl.innerHTML=a+a+a+a};
  bt();document.addEventListener('mq-lang',bt)}
 /* systems tabs with sliding indicator */

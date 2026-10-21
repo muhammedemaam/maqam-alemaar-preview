@@ -20,7 +20,7 @@
  });
  if(!data.length)return;
  var T={
-  all:['الكل','All'],c:['أرضيات الخرسانة','Concrete flooring'],e:['الأرضيات الراتنجية','Resinous flooring'],r:['إصلاح الخرسانة','Concrete repair'],w:['العزل المائي','Waterproofing'],p:['أعمال سابقة','Earlier works'],
+  all:['الكل','All'],c:['أرضيات الخرسانة','Concrete flooring'],e:['أرضيات الإيبوكسي','Epoxy flooring'],r:['إصلاح الخرسانة','Concrete repair'],w:['العزل المائي','Waterproofing'],p:['أعمال سابقة','Earlier works'],
   done:['مكتمل','Completed'],run:['قيد التنفيذ','Running'],search:['ابحث باسم المشروع أو العميل أو المقاول','Search by project, client or contractor'],
   big:['أكبر المشاريع بالمساحة','Largest projects by area'],count:['%a مشروعاً','%a projects'],none:['لا توجد نتائج مطابقة.','No matching projects.'],
   client:['العميل','Client'],contractor:['المقاول','Contractor'],prev:['السابق','Previous'],next:['التالي','Next'],page:['صفحة','Page'],
