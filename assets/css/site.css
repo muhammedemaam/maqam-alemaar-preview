@@ -1863,3 +1863,25 @@ header .bar{min-height:84px}
 @media(max-width:700px){header .logo{min-height:72px}header .logo img{height:60px}header .bar{min-height:74px}}
 header.sc .logo img{height:56px}
 header.sc .bar{min-height:70px}
+
+/* 21 Oct 2026: client updates. Shorter header, big logo on slide 01, profile downloads in footer */
+header .bar{min-height:62px}
+header .logo{min-height:62px}
+header .logo img{height:48px}
+header.sc .bar{min-height:56px}
+header.sc .logo{min-height:56px}
+header.sc .logo img{height:40px}
+@media(max-width:700px){header .bar,header .logo{min-height:56px}header .logo img{height:42px}}
+.hero .hlogo{display:block;width:auto;height:96px;margin-bottom:18px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.35))}
+@media(min-width:900px){
+ .hero .sl .tx .wrap{position:relative}
+ .hero .hlogo{position:absolute;inset-inline-end:22px;top:50%;transform:translateY(-50%);height:clamp(260px,34vh,360px);margin:0}
+}
+@media(max-width:700px){.hero .hlogo{height:72px;margin-bottom:12px}}
+footer .fdl{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+footer .fdl a.cta{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;background:var(--sky);color:var(--navy);font-size:var(--t-sm);font-weight:700;text-decoration:none;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:background .25s}
+html[dir=rtl] footer .fdl a.cta{clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+footer .fdl a.cta:hover,footer .fdl a.cta:focus-visible{background:#fff;color:var(--navy);padding-inline-start:18px}
+footer .fdl a.cta small{font-weight:600;opacity:.8}
+html body footer .g>*:first-child>.fdl{grid-column:1/-1;margin-top:4px}
+html body footer .fdl a.cta{padding:0 16px!important;justify-content:center;flex:1 1 auto;white-space:nowrap}
