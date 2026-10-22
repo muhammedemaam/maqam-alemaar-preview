@@ -209,3 +209,190 @@ html[dir=rtl] .doc .ct .fld select{background-position:left 16px center;padding-
  .doc .ct .ct-act{margin-top:20px}
  .doc .ct .ct-act .btn{min-height:50px}
 }
+/* ===== simple form v2 (22 Oct 2026): name + phone, one-tap service, optional details ===== */
+.doc .ct form.cf2{display:grid;gap:22px}
+.cf2 .cf-intro{margin:0;color:var(--mute);font-size:1.0625rem}
+.cf2 .cf-row{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:640px){.cf2 .cf-row{grid-template-columns:1fr 1fr}}
+.doc .ct .cf2 .fld{display:grid;gap:8px;grid-column:auto!important}
+.doc .ct .cf2 .fld input{height:52px;min-height:52px;font-size:1.0625rem}
+.doc .ct .cf2 .fld textarea{min-height:96px}
+.cf2 .fld label,.cf2 .lbl{margin:0;font-weight:700;color:var(--navy);font-size:1rem}
+.cf2 .opt{font-weight:400;color:var(--mute);font-size:.875rem}
+.cf2 #phone{text-align:right}
+html[dir=ltr] .cf2 #phone{text-align:left}
+.cf2 .chips{display:flex;flex-wrap:wrap;gap:10px}
+.cf2 .chip{position:relative;cursor:pointer}
+.cf2 .chip input{position:absolute;opacity:0;width:1px;height:1px}
+.cf2 .chip>span{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border:1px solid #b9cbdb;background:#fff;color:var(--navy);font-weight:600;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:background .2s,color .2s,border-color .2s}
+html[dir=rtl] .cf2 .chip>span{clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.cf2 .chip>span:before{content:"";width:8px;height:8px;background:currentColor;clip-path:var(--dia);opacity:.35}
+.cf2 .chip:hover>span{border-color:var(--blue)}
+.cf2 .chip input:checked+span{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cf2 .chip input:checked+span:before{opacity:1;background:var(--sky)}
+.cf2 .chip input:focus-visible+span{outline:3px solid var(--blue);outline-offset:2px}
+.cf2 .fx{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cf2 .fx .btn[type=submit]{min-width:200px;justify-content:center}
+@media(max-width:640px){.cf2 .fx .btn{width:100%;justify-content:center}.cf2 .chip{flex:1 1 calc(50% - 10px)}.cf2 .chip>span{width:100%;justify-content:center;padding:0 10px}}
+.cf2 #st:not(:empty){margin:0;padding:14px 16px;background:#e8f3fb;color:var(--navy);font-weight:700;border-inline-start:4px solid var(--blue)}
+.doc .ct .cf2 .chip{display:inline-block!important;padding:0!important;margin:0!important;background:none!important;clip-path:none!important;border:0!important;min-height:0!important;font-weight:inherit}
+.doc .ct .cf2 .chip::before,.doc .ct .cf2 .chip::after{content:none!important;display:none!important}
+.doc .ct .cf2 .svc{grid-template-rows:auto auto!important;gap:12px}
+.doc .ct .cf2 .svc{padding:0!important}
+@media(max-width:640px){.doc .ct .cf2 .fx{flex-direction:column;align-items:stretch}.doc .ct .cf2 .fx .btn{width:100%!important;min-width:0!important;justify-content:center}}
+/* ===== compact side-by-side layout (22 Oct 2026): form + contact details on one row ===== */
+.doc .ct form.cf2{gap:16px}
+.doc .ct .cf2 .fld input{height:48px;min-height:48px}
+.doc .ct .cf2 .fld textarea{min-height:76px}
+.cf2 .chip>span{min-height:42px;padding:0 14px}
+.cf2 .cf-row{gap:14px}
+@media(min-width:1000px){
+ .doc .wrap.body>.ct{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)!important;gap:20px!important;align-items:stretch!important}
+ .doc .ct>section{padding:32px 30px!important;margin:0!important}
+ .doc .ct>section h2,.doc .ct>section:first-child h2,.doc .ct>section:last-child h2{margin:0 0 18px!important;font-size:1.375rem}
+ .doc .ct .ct-list{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+ .doc .ct .ct-list li{grid-column:auto!important}
+ .doc .ct>section:last-child{display:flex;flex-direction:column}
+ .doc .ct>section:last-child .ct-act{margin-top:auto;padding-top:18px}
+}
+@media(min-width:1000px){.doc .wrap.body>.ct{display:grid!important;flex-direction:row!important}}
+@media(min-width:1000px){
+ .doc .ct .ct-list li{padding:12px 52px 12px 0!important;min-height:0!important}
+ html[dir=ltr] .doc .ct .ct-list li{padding:12px 0 12px 52px!important}
+ .doc .ct .ct-list .k{margin-bottom:2px!important}
+ .doc .ct .ct-list li .ci{top:12px!important}
+ .doc .ct>section:first-child{display:flex;flex-direction:column;justify-content:center}
+}
+@media(min-width:1000px){
+ html body .doc .ct .ct-list li:nth-child(n){min-height:0!important;padding:12px 0!important;padding-inline-start:56px!important;line-height:1.5}
+ html body .doc .ct .ct-list li:nth-child(n) .ci{top:50%!important;transform:translateY(-50%)}
+ html body .doc .ct .ct-list .k{font-size:.75rem!important;margin:0 0 2px!important}
+ html body .doc .ct .ct-list .v,html body .doc .ct .ct-list address{font-size:.9375rem!important}
+ html body .doc .ct .ct-list li a[href^="tel"]{font-size:1.0625rem!important}
+ .doc .ct>section:first-child{justify-content:flex-start}
+}
+/* ===== form panel in the "by the numbers" style: blue with diagonal lines (22 Oct 2026) ===== */
+html body .doc .ct>section:first-child{position:relative;overflow:hidden;background:var(--blue)!important;color:#fff}
+html body .doc .ct>section:first-child:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 2px,transparent 2px 44px),linear-gradient(90deg,rgba(7,27,45,.35),rgba(7,27,45,0) 40%)}
+html body .doc .ct>section:first-child:after{content:"";position:absolute;inset-inline-start:-140px;bottom:-140px;width:320px;height:320px;border:2px solid rgba(255,255,255,.12);transform:rotate(45deg);pointer-events:none}
+html body .doc .ct>section:first-child>*{position:relative;z-index:1}
+html body .doc .ct>section:first-child h2{color:#fff!important}
+html body .doc .ct>section:first-child h2:before{background:var(--sky)!important}
+.doc .ct .cf2 .cf-intro,.doc .ct .cf2 .opt{color:#d6e6f2}
+.doc .ct .cf2 .fld label,.doc .ct .cf2 .lbl{color:#fff}
+.doc .ct .cf2 .fld input,.doc .ct .cf2 .fld textarea{border-color:transparent!important;background:#fff}
+.doc .ct .cf2 .fld input:focus,.doc .ct .cf2 .fld textarea:focus{box-shadow:0 0 0 3px var(--sky)!important}
+.doc .ct .cf2 .chip>span{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}
+.doc .ct .cf2 .chip:hover>span{border-color:#fff;background:rgba(255,255,255,.08)}
+.doc .ct .cf2 .chip input:checked+span{background:#fff;color:var(--navy);border-color:#fff}
+.doc .ct .cf2 .chip input:checked+span:before{background:var(--blue)}
+.doc .ct .cf2 .chip input:focus-visible+span{outline-color:var(--sky)}
+.doc .ct .cf2 .fx .btn[type=submit]{background:var(--sky)!important;color:var(--navy)!important}
+.doc .ct .cf2 .fx .btn[type=submit]:hover{background:#fff!important}
+.doc .ct .cf2 .fx .btn.wa{background:transparent!important;color:#fff!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.doc .ct .cf2 .fx .btn.wa:hover{background:rgba(255,255,255,.1)!important}
+.doc .ct .cf2 .fld .err{color:#ffe1e1!important}
+.doc .ct .cf2 .fld .err:not(:empty):before{background:#ffb4b4!important}
+.doc .ct .cf2 .fld [aria-invalid=true]{box-shadow:0 0 0 2px #ffb4b4!important}
+.cf2 #st:not(:empty){background:#fff;color:var(--navy);border-inline-start-color:var(--sky)}
+html[dir=rtl] .doc .ct .ct-list li .v,html[dir=rtl] .doc .ct .ct-list li a,html[dir=rtl] .doc .ct .ct-list li address{text-align:right!important}
+html[dir=rtl] .doc .ct .ct-list li a[href^="tel"]{direction:rtl}
+/* CTAs: clear, left-aligned, WhatsApp in its own green; softer panel (22 Oct 2026) */
+html body .doc .ct>section:first-child{background:#2b6a9c!important}
+html body .doc .ct>section:first-child:before{opacity:.3}
+.doc .ct .cf2 .fx{justify-content:flex-end}
+html[dir=ltr] .doc .ct .cf2 .fx{justify-content:flex-start}
+.doc .ct .cf2 .fx .btn[type=submit]{background:#fff!important;color:var(--navy)!important;box-shadow:0 6px 18px rgba(4,18,31,.25)}
+.doc .ct .cf2 .fx .btn[type=submit]:hover{background:var(--sky)!important}
+.doc .ct .cf2 .fx .btn.wa{background:#25d366!important;color:#06301a!important;box-shadow:0 6px 18px rgba(4,18,31,.2)!important}
+.doc .ct .cf2 .fx .btn.wa:hover{background:#1ebe5b!important}
+.doc .ct .cf2 .fx .btn.wa svg,.doc .ct .cf2 .fx .btn.wa:after{color:#06301a}
+/* buttons stacked, full width; details box fills the space */
+.doc .ct .cf2 .fx{flex-direction:column!important;align-items:stretch!important;gap:12px}
+.doc .ct .cf2 .fx .btn{width:100%!important;min-width:0!important;justify-content:center;min-height:54px;font-size:1.0625rem}
+.doc .ct .cf2 .fld textarea{min-height:120px}
+/* ===== form panel v3 (22 Oct 2026): light, calm, compact ===== */
+html body .doc .ct>section:first-child{background:#f3f7fb!important;color:var(--ink);box-shadow:inset 0 0 0 1px #dbe6f0}
+html body .doc .ct>section:first-child:before{opacity:1;inset:auto;top:-70px;inset-inline-end:-70px;width:220px;height:220px;transform:rotate(45deg);background:none;border:1px solid rgba(14,79,128,.14);box-shadow:inset 0 0 0 22px #f3f7fb,inset 0 0 0 23px rgba(14,79,128,.1),inset 0 0 0 46px #f3f7fb,inset 0 0 0 47px rgba(14,79,128,.07)}
+html body .doc .ct>section:first-child:after{display:none}
+html body .doc .ct>section:first-child h2{color:var(--navy)!important}
+html body .doc .ct>section:first-child h2:before{background:var(--blue)!important}
+.doc .ct .cf2 .cf-intro{color:var(--mute);font-size:.9375rem}
+.doc .ct .cf2 .opt{color:var(--mute)}
+.doc .ct .cf2 .fld label,.doc .ct .cf2 .lbl{color:var(--navy);font-size:.9375rem}
+.doc .ct .cf2 .fld input,.doc .ct .cf2 .fld textarea{border:1px solid #c9d8e6!important;background:#fff;font-size:1rem}
+.doc .ct .cf2 .fld input{height:44px;min-height:44px}
+.doc .ct .cf2 .fld textarea{min-height:92px}
+.doc .ct .cf2 .fld input:focus,.doc .ct .cf2 .fld textarea:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px rgba(14,79,128,.15)!important}
+.doc .ct .cf2 .fld .err{color:#9b1c1c!important}
+.doc .ct .cf2 .fld .err:not(:empty):before{background:#9b1c1c!important}
+.doc .ct .cf2 .fld [aria-invalid=true]{border-color:#9b1c1c!important;box-shadow:none!important}
+.doc .ct .cf2 .fx{gap:10px}
+.doc .ct .cf2 .fx .btn{min-height:46px;font-size:1rem;box-shadow:none!important}
+.doc .ct .cf2 .fx .btn[type=submit]{background:var(--navy)!important;color:#fff!important}
+.doc .ct .cf2 .fx .btn[type=submit]:hover{background:var(--blue)!important}
+.doc .ct .cf2 .fx .btn.wa{background:#0f7a52!important;color:#fff!important}
+.doc .ct .cf2 .fx .btn.wa:hover{background:#0b6342!important}
+.doc .ct .cf2 .fx .btn.wa svg,.doc .ct .cf2 .fx .btn.wa:after{color:#fff}
+.cf2 #st:not(:empty){background:#e3f1e9;color:#0b4a32;border-inline-start-color:#0f7a52}
+@media(min-width:1000px){html body .doc .ct>section:first-child{padding:28px 28px!important}}
+/* v4: no corner lines; one primary + one quiet WhatsApp; buttons sit at the bottom, level with the map button */
+html body .doc .ct>section:first-child:before{display:none}
+@media(min-width:1000px){
+ html body .doc .ct>section:first-child{display:flex!important;flex-direction:column}
+ .doc .ct form.cf2{flex:1;display:flex!important;flex-direction:column}
+ .doc .ct .cf2 .fld:has(textarea){flex:1;display:flex!important;flex-direction:column}
+ .doc .ct .cf2 .fld textarea{flex:1}
+}
+.doc .ct .cf2 .fx{flex-direction:row!important;align-items:stretch!important;flex-wrap:nowrap;gap:10px}
+.doc .ct .cf2 .fx .btn[type=submit]{flex:1;width:auto!important}
+.doc .ct .cf2 .fx .btn.wa{flex:0 0 auto;width:auto!important;padding:0 22px;background:#fff!important;color:#0f7a52!important;box-shadow:inset 0 0 0 1.5px #0f7a52!important}
+.doc .ct .cf2 .fx .btn.wa:hover{background:#0f7a52!important;color:#fff!important}
+.doc .ct .cf2 .fx .btn.wa:after,.doc .ct .cf2 .fx .btn.wa svg{color:currentColor}
+.doc .ct .cf2 .fld{align-self:stretch!important;width:100%}
+.doc .ct .cf2 .fld textarea{width:100%!important;align-self:stretch!important;box-sizing:border-box}
+/* v6: light panel kept; name / phone / email on one row on wide screens; WhatsApp quiet outline */
+.doc .ct .cf2 .fx .btn.wa{background:#fff!important;color:#0f7a52!important;box-shadow:inset 0 0 0 1.5px #0f7a52!important}
+.doc .ct .cf2 .fx .btn.wa:hover{background:#0f7a52!important;color:#fff!important}
+@media(min-width:1180px){.cf2 .cf-row{grid-template-columns:1fr 1fr 1.2fr}}
+.doc .ct .cf2 .fx .btn.wa{background:#dff3e8!important;color:#0b5c3d!important;box-shadow:none!important}
+.doc .ct .cf2 .fx .btn.wa:hover{background:#c9ebd8!important;color:#0b5c3d!important}
+/* ===== form v7 (22 Oct 2026): white card, navy top edge, diamond icon per field like the details panel ===== */
+html body .doc .ct>section:first-child{background:#fff!important;color:var(--ink);box-shadow:inset 0 4px 0 var(--blue),0 14px 36px rgba(10,34,56,.10)!important}
+html body .doc .ct>section:first-child:before{display:none!important}
+html body .doc .ct>section:first-child h2{color:var(--navy)!important}
+html body .doc .ct>section:first-child h2:before{background:var(--blue)!important}
+.doc .ct .cf2 .cf-intro{color:var(--mute);padding-bottom:16px;border-bottom:1px solid #e3ecf4}
+.doc .ct .cf2 .fld label{color:var(--navy);font-weight:700;font-size:.9375rem}
+.cf2 .inw{position:relative;display:block}
+.cf2 .inw:before{content:"";position:absolute;z-index:1;inset-inline-start:10px;top:50%;width:30px;height:30px;margin-top:-15px;background:#bcdcf3;clip-path:var(--dia);pointer-events:none}
+.cf2 .inw:after{content:"";position:absolute;z-index:2;inset-inline-start:17px;top:50%;width:16px;height:16px;margin-top:-8px;background-repeat:no-repeat;background-position:center;background-size:14px;pointer-events:none}
+.cf2 .inw.ic-chat:before{top:14px;margin-top:0}.cf2 .inw.ic-chat:after{top:21px;margin-top:0}
+.cf2 .ic-user:after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%230a2238%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%228%22%20r%3D%224%22/%3E%3Cpath%20d%3D%22M4%2020c0-4%204-6%208-6s8%202%208%206z%22/%3E%3C/svg%3E")}
+.cf2 .ic-phone:after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%230a2238%22%3E%3Cpath%20d%3D%22M6.6%2010.8a15.1%2015.1%200%20006.6%206.6l2.2-2.2c.3-.3.7-.4%201-.2%201.1.4%202.3.6%203.6.6.6%200%201%20.4%201%201V20c0%20.6-.4%201-1%201A17%2017%200%20013%204c0-.6.4-1%201-1h3.5c.6%200%201%20.4%201%201%200%201.3.2%202.5.6%203.6.1.3%200%20.7-.2%201z%22/%3E%3C/svg%3E")}
+.cf2 .ic-mail:after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%230a2238%22%3E%3Cpath%20d%3D%22M3%205h18v14H3z%22%20opacity%3D%22.0%22/%3E%3Cpath%20d%3D%22M3%205h18v2l-9%206-9-6zM3%209l9%206%209-6v10H3z%22/%3E%3C/svg%3E")}
+.cf2 .ic-chat:after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%230a2238%22%3E%3Cpath%20d%3D%22M4%204h16v12H8l-4%204z%22/%3E%3C/svg%3E")}
+.doc .ct .cf2 .fld input,.doc .ct .cf2 .fld textarea{background:#f4f8fb!important;border:1px solid #d3e1ec!important;padding-inline-start:52px!important;color:var(--ink)}
+.doc .ct .cf2 .fld input:hover,.doc .ct .cf2 .fld textarea:hover{border-color:#a9c4da!important}
+.doc .ct .cf2 .fld input:focus,.doc .ct .cf2 .fld textarea:focus{background:#fff!important;border-color:var(--blue)!important;box-shadow:0 0 0 3px rgba(14,79,128,.14)!important}
+.doc .ct .cf2 #phone,.doc .ct .cf2 #email{text-align:right}
+html[dir=ltr] .doc .ct .cf2 #phone,html[dir=ltr] .doc .ct .cf2 #email{text-align:left}
+.doc .ct .cf2 .fld textarea{padding-top:14px!important}
+.doc .ct .cf2 .fx .btn[type=submit]{background:var(--navy)!important;color:#fff!important}
+.doc .ct .cf2 .fx .btn[type=submit]:hover{background:var(--blue)!important}
+.doc .ct .cf2 .fx .btn.wa{background:#dff3e8!important;color:#0b5c3d!important;box-shadow:none!important}
+.doc .ct .cf2 .fx .btn.wa:hover{background:#c9ebd8!important}
+html body .doc .ct>section:first-child{box-shadow:inset 0 4px 0 var(--blue),inset 0 0 0 1px #dce7f1,0 14px 36px rgba(10,34,56,.08)!important}
+@media(min-width:1000px){.doc .ct .cf2 .fld:has(textarea) .inw{flex:1;display:flex}.doc .ct .cf2 .fld:has(textarea) .inw textarea{flex:1}}
+html[dir=rtl] .doc .ct .cf2 #phone,html[dir=rtl] .doc .ct .cf2 #email{padding-right:52px!important;padding-left:12px!important}
+html[dir=ltr] .doc .ct .cf2 #phone,html[dir=ltr] .doc .ct .cf2 #email{padding-left:52px!important;padding-right:12px!important}
+/* quiet field icons */
+.cf2 .inw:before{display:none!important}
+.cf2 .inw:after{inset-inline-start:14px;width:15px;height:15px;margin-top:-7.5px;background-size:15px;opacity:.38}
+.cf2 .inw.ic-chat:after{top:16px;margin-top:0}
+.doc .ct .cf2 .fld input,.doc .ct .cf2 .fld textarea{padding-inline-start:40px!important}
+html[dir=rtl] .doc .ct .cf2 #phone,html[dir=rtl] .doc .ct .cf2 #email{padding-right:40px!important}
+html[dir=ltr] .doc .ct .cf2 #phone,html[dir=ltr] .doc .ct .cf2 #email{padding-left:40px!important}
+.doc .ct .cf2 .fld input:focus+*,.cf2 .inw:focus-within:after{opacity:.7}
+@media(min-width:640px) and (max-width:1179px){.doc .ct .cf2 .cf-row .fld:nth-child(3){grid-column:1/-1!important}}
+@media(min-width:640px) and (max-width:1179px){.doc .ct .cf2 .cf-row .fld:has(#email){grid-column:1/-1!important}}

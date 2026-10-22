@@ -1948,4 +1948,17 @@ html body footer .g .fdl a.cta,html body footer .g .fdl-b a.cta:last-child{grid-
 .nomo .hero .hmark{animation:none}
 @media(prefers-reduced-motion:reduce){.hero .hmark{animation:none}}
 @media(max-width:899px){.hero .hmark{width:84px;aspect-ratio:auto}}
-.hpf{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}#st:focus{outline:none}
+.hpf{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}#st:focus{outline:none}
+/* download in progress */
+html body footer .fdl a.cta.busy{position:relative;overflow:hidden;background:#fff;cursor:progress}
+footer .fdl a.cta.busy>.ar,footer .fdl a.cta.busy>.en{display:none!important}
+footer .fdl a.cta .dlst{display:inline-flex;align-items:center;gap:8px}
+footer .fdl a.cta .dlst:before{content:"";width:10px;height:10px;background:var(--navy);clip-path:var(--dia);animation:dlspin 1s linear infinite}
+footer .fdl a.cta.busy:after{content:"";position:absolute;bottom:0;inset-inline-start:0;height:3px;width:40%;background:var(--navy);animation:dlbar 1.2s ease-in-out infinite}
+@keyframes dlspin{to{transform:rotate(360deg)}}
+@keyframes dlbar{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}
+html[dir=rtl] footer .fdl a.cta.busy:after{animation-name:dlbarr}
+@keyframes dlbarr{0%{transform:translateX(110%)}100%{transform:translateX(-260%)}}
+footer .fdl .dl-live{margin:10px 0 0;font-size:var(--t-cap);color:var(--sky)}
+footer .fdl .dl-live:empty{display:none}
+@media(prefers-reduced-motion:reduce){footer .fdl a.cta .dlst:before,footer .fdl a.cta.busy:after{animation:none}}

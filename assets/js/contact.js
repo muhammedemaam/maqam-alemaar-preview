@@ -15,13 +15,13 @@ var M={
  stLimit:{ar:'أرسلت عدة رسائل خلال وقت قصير. حاول لاحقاً أو راسلنا على واتساب.',en:'Too many messages in a short time. Try later or message us on WhatsApp.'},
  body:{ar:'السلام عليكم،',en:'Hello,'}
 };
-var order=['name','company','phone','email','subject','ptype','loads','msg'];
-var need={name:1,phone:1,email:1,subject:1,msg:1};
+var order=['name','phone','email','msg'];
+var need={name:1,phone:1};
 var state={errs:{},st:''},T0=Date.now();
 function L(){return H.lang==='en'?'en':'ar'}
 function t(k){return M[k][L()]}
-function labelOf(id){var l=f.querySelector('label[for='+id+']');if(!l)return id;var s=l.querySelector('.'+L());return (s||l).textContent.replace(/\s*\*\s*$/,'').trim()}
-function valOf(id){var e=document.getElementById(id);if(!e)return '';if(e.tagName==='SELECT'){var o=e.options[e.selectedIndex];return o&&o.value?o.textContent.trim():''}return e.value.trim()}
+function labelOf(id){var l=id==='svc'?document.getElementById('svc-l'):f.querySelector('label[for='+id+']');if(!l)return id;var s=l.querySelector('.'+L());return (s||l).textContent.replace(/\s*\*\s*$/,'').trim()}
+function valOf(id){if(id==='svc'){var r=f.querySelector('input[name=svc]:checked');return r?r.nextElementSibling.querySelector('.'+L()).textContent.trim():''}var e=document.getElementById(id);if(!e)return '';if(e.tagName==='SELECT'){var o=e.options[e.selectedIndex];return o&&o.value?o.textContent.trim():''}return e.value.trim()}
 function opts(){[].forEach.call(f.querySelectorAll('option[data-ar]'),function(o){o.textContent=o.getAttribute('data-'+L())})}
 function check(id){
  var v=valOf(id);
@@ -51,7 +51,7 @@ function validate(){
 function text(){
  var lines=[t('body'),''];
  order.forEach(function(id){var v=valOf(id);if(v)lines.push(labelOf(id)+': '+v)});
- return {subject:(valOf('subject')||labelOf('subject'))+' - '+(valOf('name')),body:lines.join('\n')};
+ return {subject:(L()==='ar'?'طلب تواصل':'Contact request')+(valOf('svc')?' - '+valOf('svc'):'')+' - '+valOf('name'),body:lines.join('\n')};
 }
 function raw(id){var e=document.getElementById(id);return e?e.value.trim():''}
 function mailto(){var x=text();state.st='stMail';paint();window.location.href='mailto:'+TO+'?subject='+encodeURIComponent(x.subject)+'&body='+encodeURIComponent(x.body)}

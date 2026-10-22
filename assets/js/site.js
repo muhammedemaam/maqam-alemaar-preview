@@ -173,3 +173,19 @@ if(m1&&m2){
  var P=[],C=[];for(var r=0;r<4;r++)for(var c=0;c<5;c++){P.push('p'+r+c);C.push('c'+r+c)}for(r=0;r<4;r++)for(c=0;c<5;c++)C.push('d'+r+c);
  build(m1,P);build(m2,C)}
 })();
+/* profile downloads: show that something is happening (the file comes from Google Drive, so progress is not readable) */
+(function(){
+ var en=function(){return document.documentElement.lang==='en'};
+ document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('.fdl a.cta');if(!a)return;
+  if(a.classList.contains('busy')){e.preventDefault();return}
+  var size=(a.getAttribute('title')||'').replace(/^PDF,\s*/,'');
+  a.classList.add('busy');a.setAttribute('aria-busy','true');
+  var s=document.createElement('span');s.className='dlst';s.textContent=en()?'Downloading…':'جارٍ التحميل…';a.appendChild(s);
+  var box=a.closest('.fdl'),live=box.querySelector('.dl-live');
+  if(!live){live=document.createElement('p');live.className='dl-live';live.setAttribute('role','status');box.appendChild(live)}
+  live.textContent=en()?'Your download has started'+(size?' ('+size+')':'')+'. It may take a minute, check your downloads.':'بدأ تحميل الملف'+(size?' ('+size+')':'')+'. قد يستغرق دقيقة حسب سرعة الإنترنت، تابعه في التنزيلات.';
+  setTimeout(function(){a.classList.remove('busy');a.removeAttribute('aria-busy');if(s.parentNode)s.parentNode.removeChild(s)},9000);
+  setTimeout(function(){if(!box.querySelector('.busy'))live.textContent=''},20000);
+ });
+})();

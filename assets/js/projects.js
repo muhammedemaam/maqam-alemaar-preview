@@ -14,12 +14,14 @@
    if('ler'.indexOf(p[1])>-1){o.code=th?th.textContent.trim():'';o.title=td[0];o.scope=td[1];o.client=td[2];o.qty=td[3]}
    else if(p[1]==='w1'||p[1]==='w2'){o.client=td[0];o.contractor=td[1];o.title=td[2];o.st=p[1]}
    else{o.title=td[0];o.client=td[1];o.contractor=td[2];o.qty=td[3]}
+   try{o.ph=JSON.parse(tr.getAttribute('data-ph')||'[]')}catch(e){o.ph=[]}o.i=data.length;o.cl=tr.getAttribute('data-cl')||'';o.co=tr.getAttribute('data-co')||'';
    o.area=num(o.qty);o.hay=(o.title+' '+o.client+' '+o.contractor+' '+o.scope+' '+o.code).toLowerCase();
    data.push(o);
   });
  });
  if(!data.length)return;
  var T={
+  photos:['صور المشروع (%n)','Project photos (%n)'],show:['عرض الصور','View photos'],close:['إغلاق','Close'],prev:['السابقة','Previous'],next:['التالية','Next'],
   all:['الكل','All'],c:['أرضيات الخرسانة','Concrete flooring'],e:['أرضيات الإيبوكسي','Epoxy flooring'],r:['إصلاح الخرسانة','Concrete repair'],w:['العزل المائي','Waterproofing'],p:['أعمال سابقة','Earlier works'],
   done:['مكتمل','Completed'],run:['قيد التنفيذ','Running'],search:['ابحث باسم المشروع أو العميل أو المقاول','Search by project, client or contractor'],
   big:['أكبر المشاريع بالمساحة','Largest projects by area'],count:['%a مشروعاً','%a projects'],none:['لا توجد نتائج مطابقة.','No matching projects.'],
@@ -38,13 +40,33 @@
  H.classList.add('pj-on');
  var cur=0,q='',page=0,PER=12;
  var elF=document.getElementById('pj-f'),elO=document.getElementById('pj-out'),elQ=document.getElementById('pj-q');
+ /* photo gallery (lightbox) */
+ var lb=null,lbList=[],lbAt=0,lbBack=null;
+ function lbShow(){var p=lbList[lbAt],im=lb.querySelector('img');im.src=p[0];im.width=p[1];im.height=p[2];lb.querySelector('.lb-n').textContent=(lbAt+1)+' / '+lbList.length;var one=lbList.length<2;lb.querySelector('.lb-p').hidden=one;lb.querySelector('.lb-x2').hidden=one;
+  [lbAt+1,lbAt-1].forEach(function(k){if(lbList[k]){var pre=new Image();pre.src=lbList[k][0]}})}
+ function lbGo(d){lbAt=(lbAt+d+lbList.length)%lbList.length;lbShow()}
+ function lbClose(){if(!lb)return;lb.remove();lb=null;document.removeEventListener('keydown',lbKey);H.style.overflow='';if(lbBack)lbBack.focus()}
+ function lbKey(e){if(e.key==='Escape')lbClose();else if(e.key==='ArrowLeft')lbGo(H.dir==='rtl'?1:-1);else if(e.key==='ArrowRight')lbGo(H.dir==='rtl'?-1:1);else if(e.key==='Tab'){var f=lb.querySelectorAll('button:not([hidden])'),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}}
+ function lbOpen(o,btn){
+  lbList=o.ph;lbAt=0;lbBack=btn;
+  lb=document.createElement('div');lb.className='pj-lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label',L('photos').replace('%n',o.ph.length)+': '+o.title);
+  lb.innerHTML='<div class="lb-top"><p class="lb-t" lang="en" dir="ltr">'+esc(o.title)+'</p><span class="lb-n" dir="ltr"></span><button type="button" class="lb-x" aria-label="'+esc(L('close'))+'"><i></i></button></div><div class="lb-st"><button type="button" class="lb-p" aria-label="'+esc(L('prev'))+'"><i></i></button><img alt=""><button type="button" class="lb-x2 lb-nx" aria-label="'+esc(L('next'))+'"><i></i></button></div>';
+  document.body.appendChild(lb);H.style.overflow='hidden';
+  lb.querySelector('.lb-x').onclick=lbClose;lb.querySelector('.lb-p').onclick=function(){lbGo(-1)};lb.querySelector('.lb-nx').onclick=function(){lbGo(1)};
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.classList.contains('lb-st'))lbClose()});
+  var sx=null;lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',function(e){if(sx==null)return;var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>40)lbGo((d<0?1:-1)*(H.dir==='rtl'?-1:1));sx=null});
+  document.addEventListener('keydown',lbKey);lbShow();lb.querySelector('.lb-x').focus();
+ }
+ elO.addEventListener('click',function(e){var b=e.target.closest('.pj-ph');if(!b)return;var o=data[+b.getAttribute('data-i')];if(o&&o.ph&&o.ph.length)lbOpen(o,b)});
  function card(o,feat){
   var chips='<span class="pj-c">'+esc(L(gl[o.g]))+'</span>'+(o.code?'<span class="pj-code" dir="ltr">'+esc(o.code)+'</span>':'')+(o.st?'<span class="pj-st '+o.st+'">'+esc(L(o.st==='w1'?'done':'run'))+'</span>':'');
   var meta='';
-  if(o.client)meta+='<div><dt>'+esc(L('client'))+'</dt><dd lang="en" dir="ltr">'+esc(o.client)+'</dd></div>';
-  if(o.contractor&&!feat)meta+='<div><dt>'+esc(L('contractor'))+'</dt><dd lang="en" dir="ltr">'+esc(o.contractor)+'</dd></div>';
+  var lg=function(src){return src?'<img class="pj-lg" src="'+esc(src)+'" alt="" loading="lazy" decoding="async">':''};
+  if(o.client)meta+='<div><dt>'+esc(L('client'))+'</dt><dd lang="en" dir="ltr">'+lg(o.cl)+esc(o.client)+'</dd></div>';
+  if(o.contractor&&!feat)meta+='<div><dt>'+esc(L('contractor'))+'</dt><dd lang="en" dir="ltr">'+lg(o.co)+esc(o.contractor)+'</dd></div>';
   var area=o.area?'<div class="pj-a"><b dir="ltr">'+fmt(o.area)+'</b><span>m²</span></div>':(o.qty?'<div class="pj-a sm"><span dir="ltr">'+esc(o.qty)+'</span></div>':'');
-  return '<article class="pjc'+(feat?' feat':'')+' g-'+o.g+'"><div class="pj-top">'+chips+'</div><h3 lang="en" dir="ltr">'+esc(o.title)+'</h3>'+(o.scope?'<p class="pj-sc" lang="en" dir="ltr">'+esc(o.scope)+'</p>':'')+'<dl>'+meta+'</dl>'+area+'</article>';
+  var ph=o.ph&&o.ph.length?'<button type="button" class="pj-ph" data-i="'+o.i+'" aria-label="'+esc(L('photos').replace('%n',o.ph.length)+': '+o.title)+'"><span class="pj-tn"><img src="'+esc(o.ph[0][0])+'" alt="" loading="lazy" decoding="async" width="'+o.ph[0][1]+'" height="'+o.ph[0][2]+'"><span class="pj-phn" aria-hidden="true">'+o.ph.length+'</span></span><span class="pj-pl" aria-hidden="true">'+esc(L('show'))+'</span></button>':'';
+  return '<article class="pjc'+(feat?' feat':'')+(ph?' has-ph':'')+' g-'+o.g+'"><div class="pj-top">'+chips+'</div><h3 lang="en" dir="ltr">'+esc(o.title)+'</h3>'+(o.scope?'<p class="pj-sc" lang="en" dir="ltr">'+esc(o.scope)+'</p>':'')+'<dl>'+meta+'</dl>'+(ph?'<div class="pj-ft">'+area+ph+'</div>':area)+'</article>';
  }
  function view(){
   var g=filters[cur][1];
